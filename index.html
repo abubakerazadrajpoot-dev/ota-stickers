@@ -3,29 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abubakar's Anime Sticker Hub</title>
+    <title>Free Anime Stickers 🎌</title>
     <style>
-        body { font-family: sans-serif; background-color: #121212; color: white; text-align: center; padding: 20px; }
-        .container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        .card { background: #1f1f1f; border-radius: 15px; width: 280px; padding: 20px; border: 1px solid #333; }
-        img { width: 100%; border-radius: 10px; height: auto; margin-bottom: 10px; }
-        button { background: #ff4500; color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; font-weight: bold; cursor: pointer; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3em;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f9ca24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto 30px;
+            display: flex;
+            gap: 10px;
+        }
+
+        #searchInput {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .search-btn {
+            padding: 15px 25px;
+            background: linear-gradient(45deg, #ff6b6b, #f7931e);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .stickers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .sticker-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+        }
+
+        .sticker-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            background: rgba(255,255,255,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .sticker-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .sticker-card:hover .sticker-img {
+            transform: scale(1.1);
+        }
+
+        .sticker-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .stickers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>Abubakar's Anime Sticker Hub 🍥</h1>
     <div class="container">
-        <div class="card">
-            <img src="https://i.pinimg.com/originals/27/ad/47/27ad47f4da7e05910243b999df5e94b5.jpg" alt="Naruto">
-            <h3>Naruto Sage</h3>
-            <button>Add to Cart</button>
+        <header>
+            <h1>🎌 Anime Stickers</h1>
+            <p class="subtitle">Download high-quality anime stickers for free! 💖</p>
+        </header>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search stickers... (e.g., Naruto, Goku, Sailor Moon)">
+            <button class="search-btn" onclick="searchStickers()">🔍 Search</button>
         </div>
-        <div class="card">
-            <img src="https://i.pinimg.com/originals/95/9d/2e/959d2e0787e97148a0a86b360249826a.jpg" alt="Gojo">
-            <h3>Satoru Gojo</h3>
-            <button>Add to Cart</button>
+
+        <div class="categories">
+            <button class="category-btn active" onclick="filterCategory('all')">All</button>
+            <button class="category-btn" onclick="filterCategory('naruto')">Naruto</button>
+            <button class="category-btn" onclick="filterCategory('dragonball')">Dragon Ball</button>
+            <button class="category-btn" onclick="filterCategory('onepiece')">One Piece</button>
+            <button class="category-btn" onclick="filterCategory('attackontitan')">Attack on Titan</button>
+            <button class="category-btn" onclick="filterCategory('cute')">Cute</button>
+        </div>
+
+        <div class="stickers-grid" id="stickersGrid">
+            <!-- Stickers will be populated by JavaScript -->
         </div>
     </div>
+
+    <script>
+        const stickers = [
+            { id: 1, name: "Naruto Uzumaki", category: "naruto", img: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop&crop=center" },
+            { id: 2, name: "Sasuke Uchiha", category: "naruto", img: "https://images.unsplash.com/photo-1605211879839-afa0f9a9f0a1?w=300&h=300&fit=crop&crop=center" },
+            { id: 3, name: "Goku Super Saiyan", category: "dragonball", img: "https://images.unsplash.com/photo-1576063435429-292f84e14e62?w=300&h=300&fit=crop&crop=center" },
+            { id: 4, name: "Luffy Gear 5", category: "onepiece", img: "https://images.unsplash.com/photo-1682695796496-f2b5fab739ea?w=300&h=300&fit=crop&crop=center" },
+            { id: 5, name: "Eren Yeager", category: "attackontitan", img: "https://images.unsplash.com/photo-1682685795575-5b6d0d5d02e8?w=300&h=300&fit=crop&crop=center" },
+            { id: 6, name: "Cute Chibi Girl", category: "cute", img: "https://images.unsplash.com/photo-1578631618386-26e56d8e7d60?w=300&h=300&fit=crop&crop=center" },
+            { id: 7, name: "Sakura Haruno", category: "naruto", img: "https://images.unsplash.com/photo-1601583984625-5bc2e9e98a96?w=300&h=300&fit=crop&crop=center" },
+            { id: 8, name: "Vegeta Pride", category: "dragonball", img: "https://images.unsplash.com/photo-1576063435429-292f84e14e62?w=300&h=300&fit=crop&crop=center" },
+            { id: 9, name: "Zoro Roronoa", category: "onepiece", img: "https://images.unsplash.com/photo-1682695796496-f2b5fab739ea?w=300&h=300&fit=crop&crop=center" },
+            { id: 10, name: "Mikasa Ackerman", category: "attackontitan", img: "https://images.unsplash.com/photo-1682685795575-5b6d0d5d02e8?w=300&h=300&fit=crop&crop=center" },
+            { id: 11, name: "Kawaii Catgirl", category: "cute", img: "https://images.unsplash.com/photo-1578631618386-26e56d8e7d60?w=300&h=300&fit=crop&crop=center" },
+            { id: 12, name: "Itachi Uchiha", category: "naruto", img: "https://images.unsplash.com/photo-1605211879839-afa0f9a9f0a1?w=300&h=300&fit=crop&crop=center" }
+        ];
+
+        function renderStickers(stickerList = stickers) {
+            const grid = document.getElementById('stickersGrid');
+            grid.innerHTML = '';
+
+            stickerList.forEach(sticker => {
+                const card = document.createElement('div');
+                card.className = 'sticker-card';
+                card.innerHTML = `
+                    <img src="${sticker.img}" alt="${sticker.name}" class="sticker-img" 
+                         onclick="downloadSticker('${sticker.img}', '${sticker.name}')">
+                    <div class="sticker-name">${sticker.name}</div>
+                    <button class="download-btn" onclick="downloadSticker('${sticker.img}', '${sticker.name}')">
+                        💾 Download
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function downloadSticker(imgUrl, name) {
+            const link = document.createElement('a');
+            link.href = imgUrl;
+            link.download = `${name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function searchStickers() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = stickers.filter(sticker => 
+                sticker.name.toLowerCase().includes(query)
+            );
+            renderStickers(filtered);
+        }
+
+        function filterCategory(category) {
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (category === 'all') {
+                renderStickers(stickers);
+            } else {
+                const filtered = stickers.filter(sticker => sticker.category === category);
+                renderStickers(filtered);
+            }
+        }
+
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchStickers();
+            }
+        });
+
+        // Initial render
+        renderStickers();
+    </script>
 </body>
 </html>
-
